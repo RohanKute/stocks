@@ -35,6 +35,7 @@ model UserAccount {
 model Stocks {
   id        Int         @id @default(autoincrement())
   name      String
+  buyDate   String
   symbol    String
   buyPrice  Float
   sellPrice Float
