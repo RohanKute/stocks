@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
+import ProtectedComponent from "./ProtectedComp";
 
 export default function LandingPage() {
     const [showLogin, setShowLogin] = useState(false);
@@ -41,7 +42,7 @@ export default function LandingPage() {
                 </>
             )
             }
-
+           <ProtectedComponent/>
         </>
     );
 }
