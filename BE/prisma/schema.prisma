@@ -30,6 +30,7 @@ model UserAccount {
   stocks           Stocks[]
   userId           Int      @unique
   user             User     @relation(fields: [userId], references: [id])
+  @@index([userId])
 }
 
 model Stocks {

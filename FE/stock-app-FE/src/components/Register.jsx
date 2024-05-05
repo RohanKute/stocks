@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 
-export default function Register({ renderLandingPage }) {
+export default function Register({ renderMainPage ,loggedInStatus }) {
     const [formData, setFromData] = useState({ email: '', firstName: '', lastName: '', password: '' });
 
     function handleChange(e) {
@@ -9,13 +9,15 @@ export default function Register({ renderLandingPage }) {
     }
 
     function landingPage() {
-        renderLandingPage(true);
+        renderMainPage(true);
     }
 
     async function handleSubmit(e){
        e.preventDefault();
          try {
             const res = await axios.post('http://localhost:3000/user/register' , formData);
+            localStorage.setItem('token' , res.data);
+            loggedInStatus(true)
          } catch (error) {
             console.log('Something went wrong' , error);
          }

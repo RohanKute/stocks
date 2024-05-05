@@ -1,14 +1,14 @@
 import { useState } from "react";
 import axios  from 'axios'
 
-export default function Login({ renderLandingPage }) {
+export default function Login({ renderMainPage , loggedInStatus }) {
     const [data, setData] = useState({
         email: '',
         password: ''
     })
 
     function landingPage() {
-        renderLandingPage(true)
+        renderMainPage(true)
     }
 
     function handleChange(e) {
@@ -20,6 +20,7 @@ export default function Login({ renderLandingPage }) {
          try {
             const res = await axios.post('http://localhost:3000/user/login' , data)
             localStorage.setItem('token' , res.data);
+            loggedInStatus(true)
          } catch (error) {
             console.log(error)
          }

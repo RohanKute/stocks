@@ -21,7 +21,7 @@ const loginUser = router.post('/login', async (req, res) => {
     if (user) {
       const isValid = await authenticateUser(userData.password, user.password)
       if (isValid) {
-        const token = handleJwtToken().setJwtToken(user.username,user.firstName);
+        const token = handleJwtToken().setJwtToken(user.username);
         console.log("AUTH SUCCESS")
         res.json(token);
       }

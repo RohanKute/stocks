@@ -7,11 +7,12 @@ const { registerUserApi } = require('./api/registerUser');
 const { loginUser } = require('./api/loginUser');
 const { protectedRoute } = require('./api/protectedRoute');
 const { authUser } = require('./api/authUser');
-// const bodyParser = require('body-parser')
-// app.use(bodyParser.urlencoded({ extended: false }))
+const bodyParser = require('body-parser');
+const { buyStock } = require('./api/tradeStiock');
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 app.use(cors());
 config();
 app.use(express.json())
@@ -24,3 +25,4 @@ app.use('/user', registerUserApi);
 app.use('/user', loginUser);
 app.use('/', protectedRoute)
 app.use('/auth', authUser)
+app.use('/trade' , buyStock)

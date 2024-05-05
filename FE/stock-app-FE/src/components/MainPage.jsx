@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
-import ProtectedComponent from "./ProtectedComp";
 
-export default function LandingPage() {
+export default function MainPage({loggedInStatus , isLoggedIn}) {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
-    const [landingPage, setLandingPage] = useState(true);
+    const [MainPage, setMainPage] = useState(true);
 
-    function renderLandingPage(value) {
-        setLandingPage(value)
+    function renderMainPage(value) {
+        setMainPage(value)
     }
     function updateLogin() {
         setShowLogin(true);
         setShowRegister(false);
-        setLandingPage(false)
+        setMainPage(false)
     }
 
     function updateRegister() {
         setShowRegister(true);
         setShowLogin(false);
-        setLandingPage(false);
+        setMainPage(false);
     }
 
     return (
         <>
-            {!showLogin && !showRegister || landingPage ? (
+            <div style={{border : "2px solid aqua" , padding : "2em"}}>
+                {!showLogin && !showRegister || MainPage ? (
                 <>
                     <button onClick={updateLogin}>
                         Login
@@ -37,12 +37,13 @@ export default function LandingPage() {
                 </>
             ) : (
                 <>
-                    {showLogin && !landingPage && <Login renderLandingPage={renderLandingPage} />}
-                    {showRegister && !landingPage && <Register renderLandingPage={renderLandingPage} />}
+                    {showLogin && !MainPage && <Login renderMainPage={renderMainPage} loggedInStatus ={loggedInStatus}/>}
+                    {showRegister && !MainPage && <Register renderMainPage={renderMainPage} loggedInStatus ={loggedInStatus} />}
                 </>
             )
             }
-           <ProtectedComponent/>
+                </div>
+           {/* <ProtectedComponent/> */}
         </>
     );
 }
