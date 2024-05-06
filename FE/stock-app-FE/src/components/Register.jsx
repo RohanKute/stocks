@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 
-export default function Register({ renderMainPage ,loggedInStatus }) {
+export default function Register(props) {
     const [formData, setFromData] = useState({ email: '', firstName: '', lastName: '', password: '' });
 
     function handleChange(e) {
@@ -9,7 +9,7 @@ export default function Register({ renderMainPage ,loggedInStatus }) {
     }
 
     function landingPage() {
-        renderMainPage(true);
+       props.renderMainPage(true);
     }
 
     async function handleSubmit(e){
@@ -17,6 +17,7 @@ export default function Register({ renderMainPage ,loggedInStatus }) {
          try {
             const res = await axios.post('http://localhost:3000/user/register' , formData);
             localStorage.setItem('token' , res.data);
+            props.setIsOnBoard(false);
             loggedInStatus(true)
          } catch (error) {
             console.log('Something went wrong' , error);
@@ -39,7 +40,6 @@ export default function Register({ renderMainPage ,loggedInStatus }) {
 
                 <button type="submit">Register</button>
             </form>
-
             <p>Register Form</p>
             <button onClick={landingPage}>Back</button>
         </>

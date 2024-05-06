@@ -5,7 +5,7 @@ function handleJwtToken() {
   function setJwtToken(email) {
     return jwt.sign({ email }, jwtSecret, { expiresIn: '24h' });
   }
-  function verifysJwtToken(token) {
+  function verifyJwtToken(token) {
     try {
       const decoded = jwt.verify(token, jwtSecret);
       return decoded

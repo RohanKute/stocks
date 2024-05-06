@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 
-export default function MainPage({loggedInStatus , isLoggedIn}) {
+export default function MainPage({setIsOnBoard}) {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const [MainPage, setMainPage] = useState(true);
@@ -37,8 +37,8 @@ export default function MainPage({loggedInStatus , isLoggedIn}) {
                 </>
             ) : (
                 <>
-                    {showLogin && !MainPage && <Login renderMainPage={renderMainPage} loggedInStatus ={loggedInStatus}/>}
-                    {showRegister && !MainPage && <Register renderMainPage={renderMainPage} loggedInStatus ={loggedInStatus} />}
+                    {showLogin && !MainPage && <Login renderMainPage={renderMainPage} setIsOnBoard={setIsOnBoard}/>}
+                    {showRegister && !MainPage && <Register renderMainPage={renderMainPage} setIsOnBoard={setIsOnBoard}/>}
                 </>
             )
             }

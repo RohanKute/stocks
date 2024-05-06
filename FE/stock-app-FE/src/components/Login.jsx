@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios  from 'axios'
+import { loginContext } from "./MasterPage";
 
-export default function Login({ renderMainPage , loggedInStatus }) {
+export default function Login(props) {
+    const [isLoggedIn, setIsLoggedIn] = useContext(loginContext); 
     const [data, setData] = useState({
         email: '',
         password: ''
     })
 
     function landingPage() {
-        renderMainPage(true)
+        props.renderMainPage(true)
     }
 
     function handleChange(e) {
@@ -20,7 +22,8 @@ export default function Login({ renderMainPage , loggedInStatus }) {
          try {
             const res = await axios.post('http://localhost:3000/user/login' , data)
             localStorage.setItem('token' , res.data);
-            loggedInStatus(true)
+            props.setIsOnBoard(false);
+            setIsLoggedIn(true)
          } catch (error) {
             console.log(error)
          }
