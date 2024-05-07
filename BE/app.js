@@ -8,7 +8,7 @@ const { loginUser } = require('./api/loginUser');
 const { protectedRoute } = require('./api/protectedRoute');
 const { authUser } = require('./api/authUser');
 const bodyParser = require('body-parser');
-const { buyStock } = require('./api/tradeStiock');
+const { buyStock } = require('./api/tradeStock');
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json

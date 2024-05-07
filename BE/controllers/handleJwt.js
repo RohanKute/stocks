@@ -16,7 +16,7 @@ function handleJwtToken() {
   return {
     setJwtToken,
     verifyJwtToken
-  };s
+  };
 }
 
 module.exports = { handleJwtToken };

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const authUser = () => {
+const authUser = async () => {
   const token = localStorage.getItem('token');
 
   if (!token) {
@@ -15,14 +15,8 @@ const authUser = () => {
     }
   });
 
-  return axiosInstance.get('/auth')
-    .then(response => {
-      return true; // Return the response data (true or false based on authentication status)
-    })
-    .catch(error => {
-      console.error('Error occurred during authentication:', error);
-      return false; // Return false in case of any error
-    });
+  const data = await axiosInstance.get('/auth')
+ return data;
 };
 
 export default authUser;
