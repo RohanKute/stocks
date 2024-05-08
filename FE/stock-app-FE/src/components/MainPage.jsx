@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 
-export default function MainPage({setIsOnBoard}) {
+export default function MainPage({ setIsOnBoard }) {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const [MainPage, setMainPage] = useState(true);
@@ -24,26 +24,26 @@ export default function MainPage({setIsOnBoard}) {
 
     return (
         <>
-            <div style={{border : "2px solid aqua" , padding : "2em"}}>
+            <div style={{ border: "2px solid aqua", padding: "2em" }}>
                 {!showLogin && !showRegister || MainPage ? (
-                <>
-                    <button onClick={updateLogin}>
-                        Login
+                    <>
+                        <button onClick={updateLogin}>
+                            Login
 
-                    </button>
-                    <button onClick={updateRegister}>
-                        Register
-                    </button>
-                </>
-            ) : (
-                <>
-                    {showLogin && !MainPage && <Login renderMainPage={renderMainPage} setIsOnBoard={setIsOnBoard}/>}
-                    {showRegister && !MainPage && <Register renderMainPage={renderMainPage} setIsOnBoard={setIsOnBoard}/>}
-                </>
-            )
-            }
-                </div>
-           {/* <ProtectedComponent/> */}
+                        </button>
+                        <button onClick={updateRegister}>
+                            Register
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {showLogin && !MainPage && <Login renderMainPage={renderMainPage} setIsOnBoard={setIsOnBoard} />}
+                        {showRegister && !MainPage && <Register renderMainPage={renderMainPage} setIsOnBoard={setIsOnBoard} />}
+                    </>
+                )
+                }
+            </div>
+            {/* <ProtectedComponent/> */}
         </>
     );
 }

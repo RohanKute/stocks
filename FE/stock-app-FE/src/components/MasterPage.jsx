@@ -6,6 +6,8 @@ import authUser from "../utils/authUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GetOnBoard from "./GetOnBoard";
 import Trade from "./Trade";
+import AccountDetail from "./Userdetail";
+import ViewStocks from "./ViewStock";
 
 export const loginContext = createContext();
 
@@ -33,16 +35,28 @@ export default function MasterPage() {
                                 {isLoggedIn && <Trade loggedInStatus={setIsLoggedIn} />}
                                 {!isLoggedIn && <GetOnBoard setIsOnBoard={setIsOnBoard} />}
                                 {isLoggedIn && <Logout setIsOnBoard={setIsOnBoard} />}
+                                {isLoggedIn && <AccountDetail/>}
+                                {isLoggedIn && <ViewStocks/>}
+
+
                             </>
                         } />
                     <Route path="/trade" element={
                             <>
                                 {!isOnBoard && <SearchStockAndDisplay />}
                                 {isLoggedIn && <Logout />}
+                                {isLoggedIn && <AccountDetail/>}
+                            </>
+                        } />
+
+                    <Route path="/view-stocks" element={
+                            <>
+                                {isLoggedIn && <ViewStocks/>}
                             </>
                         } />
                     </Routes>
                 </Router>
+
             </loginContext.Provider>
         </>
     )

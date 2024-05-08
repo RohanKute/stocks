@@ -10,6 +10,7 @@ const { authUser } = require('./api/authUser');
 const bodyParser = require('body-parser');
 const { buyStock, sellStock } = require('./api/tradeStock');
 const { getUserDetails } = require('./api/userDetails');
+const { viewStock } = require('./api/viewStocks');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
@@ -27,4 +28,4 @@ app.use('/user', loginUser);
 app.use('/', protectedRoute);
 app.use('/auth', authUser);
 app.use('/trade' , buyStock , sellStock);
-app.use('/user', getUserDetails);
+app.use('/user', getUserDetails , viewStock);

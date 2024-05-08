@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 const viewStock = router.get('/view-stocks', async (req, res) => {
     try {
         const userAuth = handleJwtToken().verifyJwtToken(req.headers.authorization);
-        const stocks = prisma.user.findUnique({
+        const stocks = await prisma.user.findUnique({
             where: {
                 username: userAuth.email
             },
@@ -19,7 +19,8 @@ const viewStock = router.get('/view-stocks', async (req, res) => {
                 }
             }
         })
-        res.json(stocks);
+        console.table(stocks.userAccount.stocks);
+        res.json(stocks.userAccount.stocks);
     } catch (error) {
         console.log(error)
     }
