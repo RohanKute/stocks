@@ -44,7 +44,7 @@ const buyStock = router.post('/buy', async (req, res) => {
                 }
             })
 
-             await prisma.stocks.create({
+            await prisma.stocks.create({
                 data: {
                     name: data.data[0].companyName,
                     buyDate: `${Date.now()}`,
@@ -66,7 +66,7 @@ const buyStock = router.post('/buy', async (req, res) => {
                 stock: stockName,
                 quantity: reqData.quantity
             }
-            res.json(resObj)    
+            res.json(resObj)
         }
 
     } catch (error) {
@@ -85,7 +85,7 @@ const sellStock = router.post('/sell', async (req, res) => {
         const stockName = getSymbol(stockData.stockName.toLowerCase());
         const data = await axios.get(`https://api.iex.cloud/v1/data/core/quote/${stockName}?token=${process.env.IEX_TOKEN}`);
         const stockLatestPrice = data.data[0].latestPrice;
-        
+
         const user = await prisma.user.findUnique({
             where: {
                 username: userData.email
@@ -103,7 +103,7 @@ const sellStock = router.post('/sell', async (req, res) => {
 
         const newBalance = userAccount.balance + (stockLatestPrice * stockData.quantity);
         const newTradingStatement = userAccount.tradingStatement + ((stockData.buyPrice - stockLatestPrice) * stockData.quantity)
-        
+
         await prisma.userAccount.update({
             where: {
                 userId: user.id
@@ -113,22 +113,22 @@ const sellStock = router.post('/sell', async (req, res) => {
                 tradingStatement: newTradingStatement
             }
         });
-       
+
         await prisma.stocks.update({
             where: {
-              id: Number(stockData.id),
+                id: Number(stockData.id),
             },
             data: {
-              sellPrice: stockLatestPrice,
-              quantity: 0
+                sellPrice: stockLatestPrice,
+                quantity: 0
             }
-          })
-         const resObj = {
-            messege : "sell-success",
-            sellPrice : stockLatestPrice,
-            totalSell : stockLatestPrice * stockData.quantity,
-            balance : newBalance
-         }
+        })
+        const resObj = {
+            messege: "sell-success",
+            sellPrice: stockLatestPrice,
+            totalSell: stockLatestPrice * stockData.quantity,
+            balance: newBalance
+        }
         res.json(resObj);
     } catch (error) {
         console.log(error);
