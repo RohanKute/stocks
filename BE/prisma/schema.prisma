@@ -40,6 +40,8 @@ model Stocks {
   symbol    String
   buyPrice  Float
   sellPrice Float
+  quantity  Int?
+  totalPurchase Float? 
   ownerId   Int 
   owner     UserAccount? @relation(fields: [ownerId], references: [id])
   @@index([ownerId])

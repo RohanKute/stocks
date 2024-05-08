@@ -8,11 +8,12 @@ const { loginUser } = require('./api/loginUser');
 const { protectedRoute } = require('./api/protectedRoute');
 const { authUser } = require('./api/authUser');
 const bodyParser = require('body-parser');
-const { buyStock } = require('./api/tradeStock');
-app.use(bodyParser.urlencoded({ extended: false }))
+const { buyStock, sellStock } = require('./api/tradeStock');
+const { getUserDetails } = require('./api/userDetails');
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(cors());
 config();
 app.use(express.json())
@@ -23,6 +24,7 @@ app.listen(3000, () => {
 app.use('/', stockQouteApi);
 app.use('/user', registerUserApi);
 app.use('/user', loginUser);
-app.use('/', protectedRoute)
-app.use('/auth', authUser)
-app.use('/trade' , buyStock)
+app.use('/', protectedRoute);
+app.use('/auth', authUser);
+app.use('/trade' , buyStock , sellStock);
+app.use('/user', getUserDetails);

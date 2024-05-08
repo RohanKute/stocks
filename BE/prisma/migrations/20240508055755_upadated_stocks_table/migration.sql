@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Stocks" ADD COLUMN     "quantity" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "totalPurchase" DOUBLE PRECISION NOT NULL DEFAULT 0;
