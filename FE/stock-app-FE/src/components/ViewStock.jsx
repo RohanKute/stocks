@@ -6,6 +6,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import CircularProgress from '@mui/material/CircularProgress';
+import Paper from '@mui/material/Paper';
 
 export default function ViewStocks() {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -43,7 +45,7 @@ export default function ViewStocks() {
         id: stock.id,
         quantity: stock.quantity,
         stockName: stock.name,
-        buyPrice : stock.buyPrice
+        buyPrice: stock.buyPrice
       });
       const res = await axiosInstance.get('http://localhost:3000/user/view-stocks');
       setStocks(res.data);
@@ -64,9 +66,9 @@ export default function ViewStocks() {
       ) : (
         <>
           {stocks ? (
-            <TableContainer>
-              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                <TableHead>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 , color : 'white'}}  size="small" aria-label="a dense table">
+                <TableHead >
                   <TableRow>
                     <TableCell>Stock Name</TableCell>
                     <TableCell>Symbol</TableCell>
@@ -87,7 +89,9 @@ export default function ViewStocks() {
                       <TableCell>{stock.totalPurchase.toFixed(2)}</TableCell>
                       <TableCell>{stock.sellPrice.toFixed(2)}</TableCell>
                       <TableCell>
-                        <button onClick={() => handleOnClickSell(stock)}>Sell</button>
+                        {stock.quantity > 0 ? (<button onClick={() => handleOnClickSell(stock)}>Sell</button>) :
+                          (<><p>Sold</p></>)}
+
                       </TableCell>
                     </TableRow>
                   ))}
@@ -95,7 +99,9 @@ export default function ViewStocks() {
               </Table>
             </TableContainer>
           ) : (
-            <p>Loading...</p>
+            <p>
+              <CircularProgress size={20} color="inherit" />
+            </p>
           )}
           <button onClick={handleOnClickBack}>Back</button>
         </>

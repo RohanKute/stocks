@@ -6,9 +6,8 @@ const prisma = new PrismaClient();
 
 
 const getUserDetails = router.get('/user-details', async (req, res) => {
-    try {
+    try {      
         const userAuth = handleJwtToken().verifyJwtToken(req.headers.authorization);
-
         const userWithAccountAndStocks = await prisma.user.findUnique({
             where: {
               username: userAuth.email

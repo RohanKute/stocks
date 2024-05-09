@@ -8,6 +8,9 @@ import GetOnBoard from "./GetOnBoard";
 import Trade from "./Trade";
 import AccountDetail from "./Userdetail";
 import ViewStocks from "./ViewStock";
+import AddAmount from "./AddAmount";
+import { Button } from "@mui/material";
+import RouteButton from "./RouteButton";
 
 export const loginContext = createContext();
 
@@ -37,7 +40,7 @@ export default function MasterPage() {
                                 {isLoggedIn && <Logout setIsOnBoard={setIsOnBoard} />}
                                 {isLoggedIn && <AccountDetail/>}
                                 {isLoggedIn && <ViewStocks/>}
-
+                                {isLoggedIn && <RouteButton link ={'/add-amount'}/>}
 
                             </>
                         } />
@@ -52,6 +55,11 @@ export default function MasterPage() {
                     <Route path="/view-stocks" element={
                             <>
                                 {isLoggedIn && <ViewStocks/>}
+                            </>
+                        } />
+                    <Route path="/add-amount" element={
+                            <>
+                                {isLoggedIn && <AddAmount/> }
                             </>
                         } />
                     </Routes>

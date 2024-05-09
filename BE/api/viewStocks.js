@@ -19,7 +19,6 @@ const viewStock = router.get('/view-stocks', async (req, res) => {
                 }
             }
         })
-        console.table(stocks.userAccount.stocks);
         res.json(stocks.userAccount.stocks);
     } catch (error) {
         console.log(error)

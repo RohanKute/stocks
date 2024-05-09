@@ -10,6 +10,7 @@ const axios = require('axios')
 const buyStock = router.post('/buy', async (req, res) => {
     try {
         const userData = handleJwtToken().verifyJwtToken(req.headers.authorization);
+        console.log(req.headers);
         const user = await prisma.user.findUnique({
             where: {
                 username: userData.email
@@ -19,7 +20,8 @@ const buyStock = router.post('/buy', async (req, res) => {
             }
         })
         const reqData = req.body;
-        const stockName = getSymbol(reqData.stockName.toLowerCase());
+        const stockStr = reqData.stockName.toLowerCase().split(' ');
+        const stockName = getSymbol(stockStr[0]);
         const data = await axios.get(`https://api.iex.cloud/v1/data/core/quote/${stockName}?token=${process.env.IEX_TOKEN}`);
         const stockLatestPrice = data.data[0].latestPrice;
 
@@ -82,7 +84,8 @@ const sellStock = router.post('/sell', async (req, res) => {
     try {
         const userData = handleJwtToken().verifyJwtToken(req.headers.authorization);
         const stockData = req.body;
-        const stockName = getSymbol(stockData.stockName.toLowerCase());
+        const stockStr = stockData.stockName.toLowerCase().split(' ');
+        const stockName = getSymbol(stockStr[0]);
         const data = await axios.get(`https://api.iex.cloud/v1/data/core/quote/${stockName}?token=${process.env.IEX_TOKEN}`);
         const stockLatestPrice = data.data[0].latestPrice;
 

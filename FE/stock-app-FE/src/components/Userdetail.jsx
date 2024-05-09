@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function AccountDetail() {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -62,7 +63,9 @@ export default function AccountDetail() {
               </Table>
             </TableContainer>
           ) : (
-            <p>Loading...</p> // Display loading indicator while details are being fetched
+             <p>
+              <CircularProgress size={20} color="inherit" />
+             </p> // Display loading indicator while details are being fetched
           )}
           <button onClick={handleOnClickBack}>Back</button>
         </>

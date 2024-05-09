@@ -1,8 +1,8 @@
 // import { MDBBtn, MDBAlert } from 'mdb-react-ui-kit';
-import axios from "axios";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { useState } from "react";
+import { axiosInstance } from "../utils/axiosInstance";
 export default function BuyStock({ stockInfo }) {
     const [tradeResult, setTradeResult] = useState({ messege: "", quantity: "", stock: "", totalPurchaceAmout: 0 });
 
@@ -13,23 +13,13 @@ export default function BuyStock({ stockInfo }) {
             quantity: e.target.quantity.value,
             stockName: stockInfo.companyName
         }
-        const token = localStorage.getItem('token');
-        const axiosInstance = await axios.create({
-            baseURL: 'http://localhost:3000',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `${token}` // Include JWT token from localStorage directly
-            }
-        });
-
         const result = await axiosInstance.post('/trade/buy', data);
-        console.log(result);
         setTradeResult(result.data)
     }
 
     const handleCloseAlert = () => {
         setTradeResult({ message: "", quantity: "", stock: "", totalPurchaceAmout: 0 }); // Reset tradeResult to clear the alert
-      };
+    };
     return (
         <>
             {tradeResult.messege == "success" ? (

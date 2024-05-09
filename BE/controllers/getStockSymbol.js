@@ -5,6 +5,7 @@ function getSymbol(str) {
     const stockNameBefore = stockArray.find((stock, i) => {
         return stock.title.toLowerCase().includes(str)
     })
+    console.log("stockNameBefore: ", stockNameBefore)
     const symbol = stockNameBefore.ticker.replace(/-/, '.');
     return symbol;
 }
